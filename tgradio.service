@@ -1,0 +1,21 @@
+[Unit]
+Description=TGRadio - Telegram voice chat radio bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# Adjust User= to whatever non-root user you run this as.
+User=tgradio
+WorkingDirectory=/opt/tgradio
+EnvironmentFile=/opt/tgradio/.env
+ExecStart=/opt/tgradio/venv/bin/python /opt/tgradio/main.py
+Restart=always
+RestartSec=10
+
+# Basic hardening — remove/relax any of these if they cause issues.
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
